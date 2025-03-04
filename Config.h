@@ -7,12 +7,12 @@
 #include <WiFiManager.h>
 #include <TimeLib.h>
 #include <WiFiUdp.h>
-#include <ESP8266WebServer.h>   //  ESP8266WebServer库
+#include <WebServer.h>
 #include <WebSocketsServer.h>
-#include <ESP8266mDNS.h>
+#include <ESPmDNS.h>
 #include <Ticker.h>
 #include <ArduinoJson.h>
-#include <Hash.h>
+// #include <Hash.h>
 
 #include "MyPalette.h"
 #include "Image.h"
@@ -21,8 +21,8 @@
 
 #define MDNS_NAME "YuePixel"
 
-#define LED_PIN 4                             // GPIO4为信号引脚
-#define LED_FONT_PIN 5                        // GPIO5（D2)为虚拟引脚，配置字体颜色使用
+#define LED_PIN 11                            // GPIO4为信号引脚
+#define LED_FONT_PIN 1                        // GPIO5（D2)为虚拟引脚，配置字体颜色使用
 #define COLOR_ORDER GRB                       //色彩顺序
 #define CHIPSET WS2812B                       //灯珠类型
 #define MATRIXWIDTH 8                         //屏幕宽度
@@ -61,7 +61,7 @@ char settingMessage[500] = {0};
 int clockMode = 0;  //时钟模式 0：不显示 1~4：对应风格
 //***************************文字显示配置************************
 int wordShowkMode = 0;  //0：不显示 1：滚动显示 2：闪烁显示
-char* message_str;      
+char* message_str;
 int len_t, cnstr_p = 0;
 int cnstr_type[200];    // cnstr_type：Cnfont8x8 字体字符串各字符中英文类型数组，0位英文，1位中文，2结束
 int wordshow_i = 0;
@@ -244,7 +244,7 @@ struct PaletteColorVar  //色盘颜色填充函数参数
     uint16_t N;           //灯珠数量
     uint8_t startIndex;   //起始颜色序号
     uint8_t incIndex;     //灯珠间颜色差
-    CRGBPalette16 pal;   //palette色盘名  
+    CRGBPalette16 pal;   //palette色盘名
     uint8_t brightness;   //亮度
     TBlendType blendType; //色彩过渡方式  LINEARBLEND：线性渐变  NOBLEND：不渐变
 
@@ -325,7 +325,7 @@ void WebServer_run();
 void ShowIP();
 void tickerCount();
 void showClock();
-void SetupPurpleAndGreenPalette(); 
+void SetupPurpleAndGreenPalette();
 void SetupTotallyRandomPalette();
 void SetupBlackAndWhiteStripedPalette();
 void showAnimation();
